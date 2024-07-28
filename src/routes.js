@@ -11,6 +11,22 @@ router.get('/', (req, res) => {
     });
 });
 
+router.get('/database', async (req, res) => {
+    try {
+        await initializeDatabase();
+        res.json({
+            "statusCode": 200,
+            "msg": "Tabelas criadas/atualizadas com sucesso"
+        });
+    } catch (error) {
+        res.status(500).json({
+            "statusCode": 500,
+            "msg": "Erro ao criar/atualizar tabelas",
+            "error": error.message
+        });
+    }
+});
+
 // Rotas para Categorias
 router.get('/categories', selectCategories);
 router.get('/category', selectCategory);

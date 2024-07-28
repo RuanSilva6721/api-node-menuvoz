@@ -14,7 +14,6 @@ export async function createOptionTable() {
   `);
 }
 
-
 // Seleciona todas as opções
 export async function selectOptions(req, res) {
   const options = await db.any('SELECT * FROM Opcao');
@@ -30,19 +29,27 @@ export async function selectOption(req, res) {
 
 // Insere uma nova opção
 export async function insertOption(req, res) {
-  const { nome, categoriaId } = req.body;
-  await db.none('INSERT INTO Opcao (nome, categoriaId) VALUES ($1, $2)', [nome, categoriaId]);
+  const { nome, descricao, preco, imagem, categoriaId } = req.body;
+  await db.none(
+    'INSERT INTO Opcao (nome, descricao, preco, imagem, categoriaId) VALUES ($1, $2, $3, $4, $5)',
+    [nome, descricao, preco, imagem, categoriaId]
+  );
   res.json({
-    "statusCode": 200
+    "statusCode": 200,
+    "msg": "Opção inserida com sucesso"
   });
 }
 
 // Atualiza uma opção existente
 export async function updateOption(req, res) {
-  const { id, nome, categoriaId } = req.body;
-  await db.none('UPDATE Opcao SET nome = $1, categoriaId = $2 WHERE id = $3', [nome, categoriaId, id]);
+  const { id, nome, descricao, preco, imagem, categoriaId } = req.body;
+  await db.none(
+    'UPDATE Opcao SET nome = $1, descricao = $2, preco = $3, imagem = $4, categoriaId = $5 WHERE id = $6',
+    [nome, descricao, preco, imagem, categoriaId, id]
+  );
   res.json({
-    "statusCode": 200
+    "statusCode": 200,
+    "msg": "Opção atualizada com sucesso"
   });
 }
 
@@ -51,6 +58,7 @@ export async function deleteOption(req, res) {
   const { id } = req.body;
   await db.none('DELETE FROM Opcao WHERE id = $1', [id]);
   res.json({
-    "statusCode": 200
+    "statusCode": 200,
+    "msg": "Opção deletada com sucesso"
   });
 }

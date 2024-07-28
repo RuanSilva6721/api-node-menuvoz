@@ -8,7 +8,7 @@
   ],
   "routes": [
     {
-      "src": "/manifest.json",
+      "src": "/",
       "headers": {
         "Access-Control-Allow-Origin": "*"
       },

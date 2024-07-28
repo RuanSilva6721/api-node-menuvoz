@@ -2,8 +2,18 @@ import db from '../configDB.js';
 
 // Cria a tabela Opcao se não existir
 export async function createOptionTable() {
-  await db.none('CREATE TABLE IF NOT EXISTS Opcao ( id SERIAL PRIMARY KEY, nome TEXT, categoriaId INTEGER REFERENCES Categoria(id) )');
+  await db.none(`
+    CREATE TABLE IF NOT EXISTS Opcao (
+      id SERIAL PRIMARY KEY,
+      nome TEXT,
+      descricao TEXT,
+      preco NUMERIC,
+      imagem JSONB,
+      categoriaId INTEGER REFERENCES Categoria(id)
+    )
+  `);
 }
+
 
 // Seleciona todas as opções
 export async function selectOptions(req, res) {

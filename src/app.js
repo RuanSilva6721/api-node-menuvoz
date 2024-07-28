@@ -8,7 +8,7 @@ import http from 'http';
 const app = express();
 app.use(express.json());
 app.use(cors({
-  origin: '*', // Ajuste isso conforme necessário
+  origin: '*',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true
 }));

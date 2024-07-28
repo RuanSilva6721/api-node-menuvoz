@@ -14,11 +14,16 @@ app.use(router);
 
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, async () => {
-  console.log(`Api Rodando na porta ${PORT}`);
+// Função para inicializar o banco de dados
+async function initializeDatabase() {
   await createCategoryTable();
   await createOptionTable();
   // Chame outras funções de criação de tabela conforme necessário
+}
+
+app.listen(PORT, async () => {
+  console.log(`Api Rodando na porta ${PORT}`);
+  await initializeDatabase(); // Chama a função para inicializar o banco de dados
 });
 
 // Se você quiser suportar HTTPS localmente

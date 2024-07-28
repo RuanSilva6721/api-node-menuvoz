@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { selectCategories, selectCategory, insertCategory, updateCategory, deleteCategory } from './Controller/Category.js';
 import { selectOptions, selectOption, insertOption, updateOption, deleteOption } from './Controller/Option.js';
+import { initializeDatabase } from './initializeDatabase.js';
 
 const router = Router();
 

@@ -7,7 +7,12 @@ import http from 'http';
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: '*', // Ajuste isso conforme necessário
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true
+}));
+
 app.use(router);
 
 const PORT_HTTP = process.env.PORT_HTTP || 3000;
@@ -27,5 +32,5 @@ if (fs.existsSync('src/SSL/code.crt') && fs.existsSync('src/SSL/code.key')) {
     console.log(`API Rodando em https na porta ${PORT_HTTPS}`);
   });
 } else {
-  console.log('Certificados SSL não encontrados. HTTPS não será iniciado.');
+  console.error('Certificados SSL não encontrados. HTTPS não será iniciado.');
 }

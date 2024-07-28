@@ -8,7 +8,7 @@ export async function createOptionTable() {
       nome TEXT,
       descricao TEXT,
       preco NUMERIC,
-      imagem JSONB,
+      imagem TEXT,
       categoriaId INTEGER REFERENCES Categoria(id)
     )
   `);

@@ -55,13 +55,22 @@ export async function updateOption(req, res) {
 
 // Deleta uma opção pelo id
 export async function deleteOption(req, res) {
-  const { id } = req.body;
-  await db.none("DELETE FROM Opcao WHERE id = $1", [id]);
-  res.json({
-    statusCode: 200,
-    msg: "Opção deletada com sucesso",
-  });
+  const { id } = req.params; // Extrai o id da URL
+  try {
+    await db.none("DELETE FROM Opcao WHERE id = $1", [id]);
+    res.json({
+      statusCode: 200,
+      msg: "Opção deletada com sucesso",
+    });
+  } catch (error) {
+    res.status(500).json({
+      statusCode: 500,
+      msg: "Erro ao deletar a opção",
+      error: error.message,
+    });
+  }
 }
+
 export async function selectOptionsByCategory(req, res) {
   const { categoriaId } = req.body;
   const options = await db.any('SELECT * FROM Opcao WHERE categoriaId = $1', [categoriaId]);

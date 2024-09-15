@@ -63,9 +63,7 @@ export async function deleteOption(req, res) {
   });
 }
 export async function selectOptionsByCategory(req, res) {
-  const { categoriaId } = req.params;
-  const options = await db.any("SELECT * FROM Opcao WHERE categoriaId = $1", [
-    categoriaId,
-  ]);
+  const { categoriaId } = req.body;
+  const options = await db.any('SELECT * FROM Opcao WHERE categoriaId = $1', [categoriaId]);
   res.json(options);
 }

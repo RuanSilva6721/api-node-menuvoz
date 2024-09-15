@@ -54,6 +54,6 @@ router.get("/option/:id", selectOption);
 router.post("/option", insertOption);
 router.put("/option", updateOption);
 router.delete("/option/:id", deleteOption);
-router.post("/option/:categoriaId", selectOptionsByCategory);
+router.post("/optionsCategory", selectOptionsByCategory);
 
 export default router;
